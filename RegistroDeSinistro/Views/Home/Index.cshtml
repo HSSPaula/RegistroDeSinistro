@@ -1,8 +1,27 @@
-﻿@{
+﻿@model List<Sinistro>
+@{
     ViewData["Title"] = "Home Page";
 }
-
+<a asp-controller="Home" asp-action="AddSinistro" class="btn btn-success">Registrar Sinistro</a>
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <table class="table">
+        <tr>
+            <th>Data</th>
+            <th>Tipo</th>
+            <th>Local</th>
+            <th colspan="2">Ações</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Data</td>
+                <td>@item.Tipo</td>
+                <td>@(item.Rua + ", " + item.Numero + " - " + item.Bairro + " - " + item.Cidade + ", " + item.Estado + " - " + item.Pais)</td>
+                <td><a asp-controller="Home" asp-action="EditSinistro" asp-route-id="@item.Id" class="btn btn-primary">Editar</a></td>
+                <td><button type="button" class="btn btn-danger">Excluir</button></td>
+            </tr>
+        }
+       
+       
+    </table>
 </div>
